@@ -1,0 +1,59 @@
+\name{plot.AUC}
+\alias{plot.AUC}
+\title{Plot the sensitivity, specificity, accuracy and roc curves.}
+\usage{
+  \method{plot}{AUC} (x, y = NULL, ..., type = "l",
+    add = FALSE, min = 0, max = 1)
+}
+\arguments{
+  \item{x}{an object produced by one of the functions
+  \code{sensitivity}, \code{specificity}, \code{accuracy},
+  or \code{roc}}
+
+  \item{y}{Not used.}
+
+  \item{...}{Arguments to be passed to methods, such as
+  graphical parameters. See ?plot}
+
+  \item{type}{Type of plot. Default is line plot.}
+
+  \item{add}{Logical. If TRUE the curve is added to an
+  existing plot. If FALSE a new plot is created.}
+
+  \item{min}{a numeric value between 0 and 1, denoting the
+  cutoff that defines the start of the area under the
+  curve}
+
+  \item{max}{a numeric value between 0 and 1, denoting the
+  cutoff that defines the end of the area under the curve}
+}
+\description{
+  This function plots the (partial) sensitivity,
+  specificity, accuracy and roc curves.
+}
+\examples{
+data(churn)
+
+plot(sensitivity(churn$predictions,churn$labels))
+
+plot(specificity(churn$predictions,churn$labels))
+
+plot(accuracy(churn$predictions,churn$labels))
+
+plot(roc(churn$predictions,churn$labels))
+}
+\author{
+  Authors: Michel Ballings and Dirk Van den Poel,
+  Maintainer: \email{Michel.Ballings@UGent.be}
+}
+\references{
+  Ballings, M., Van den Poel, D., Threshold Independent
+  Performance Measures for Probabilistic Classifcation
+  Algorithms, Forthcoming.
+}
+\seealso{
+  \code{\link{sensitivity}}, \code{\link{specificity}},
+  \code{\link{accuracy}}, \code{\link{roc}},
+  \code{\link{auc}}, \code{\link{plot}}
+}
+

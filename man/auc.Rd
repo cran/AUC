@@ -1,0 +1,55 @@
+\name{auc}
+\alias{auc}
+\title{Compute the area under the curve of a given performance measure.}
+\usage{
+  auc(x, min = 0, max = 1)
+}
+\arguments{
+  \item{x}{an object produced by one of the functions
+  \code{sensitivity}, \code{specificity}, \code{accuracy},
+  or \code{roc}}
+
+  \item{min}{a numeric value between 0 and 1, denoting the
+  cutoff that defines the start of the area under the
+  curve}
+
+  \item{max}{a numeric value between 0 and 1, denoting the
+  cutoff that defines the end of the area under the curve}
+}
+\value{
+  A numeric value between zero and one denoting the area
+  under the curve
+}
+\description{
+  This function computes the area under the sensitivity
+  curve (AUSEC), the area under the specificity curve
+  (AUSPC), the area under the accuracy curve (AUACC), or
+  the area under the receiver operating characteristic
+  curve (AUROC).
+}
+\examples{
+data(churn)
+
+auc(sensitivity(churn$predictions,churn$labels))
+
+auc(specificity(churn$predictions,churn$labels))
+
+auc(accuracy(churn$predictions,churn$labels))
+
+auc(roc(churn$predictions,churn$labels))
+}
+\author{
+  Authors: Michel Ballings and Dirk Van den Poel,
+  Maintainer: \email{Michel.Ballings@UGent.be}
+}
+\references{
+  Ballings, M., Van den Poel, D., Threshold Independent
+  Performance Measures for Probabilistic Classifcation
+  Algorithms, Forthcoming.
+}
+\seealso{
+  \code{\link{sensitivity}}, \code{\link{specificity}},
+  \code{\link{accuracy}}, \code{\link{roc}},
+  \code{\link{auc}}, \code{\link{plot}}
+}
+

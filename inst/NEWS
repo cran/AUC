@@ -1,0 +1,4 @@
+Change log:
+
+* Version 0.1.0: July 2013
+- Package submitted to CRAN with functions sensitivity, specificity, accuracy, roc, auc, and plot
