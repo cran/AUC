@@ -24,7 +24,6 @@
 #' @seealso \code{\link{sensitivity}}, \code{\link{specificity}}, \code{\link{accuracy}}, \code{\link{roc}}, \code{\link{auc}}, \code{\link{plot}}
 #' @return A numeric value between zero and one denoting the area under the curve
 #' @author Authors: Michel Ballings and Dirk Van den Poel, Maintainer: \email{Michel.Ballings@@UGent.be}
-
 auc <-  function(x, min=0,max=1) {
   
   if (any(class(x) == "roc")) {

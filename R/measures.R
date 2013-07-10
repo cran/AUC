@@ -24,7 +24,7 @@ roc <-  function(predictions, labels) {
                 #It has less functionality and less error handling and is focused on speed.
                 #please see ROCR
   
-                cm <- .confusionMatrix(predictions,labels)
+                cm <- .confusionMatrix(predictions,labels,FALSE)
                 
                 x <- cm$fp / cm$n.neg
                 y <- cm$tp / cm$n.pos
@@ -51,6 +51,7 @@ roc <-  function(predictions, labels) {
 #' 
 #' @param predictions A numeric vector of classification probabilities (confidences, scores) of the positive event.
 #' @param labels A factor of observed class labels (responses) with the only allowed values \{0,1\}.
+#' @param perc.rank A logical. If TRUE (default) the percentile rank of the predictions is used.
 #' 
 #' @examples
 #' 
@@ -64,11 +65,11 @@ roc <-  function(predictions, labels) {
 #' \item{cutoffs}{A numeric vector of threshold values}
 #' \item{measure}{A numeric vector of sensitivity values corresponding to the threshold values}
 #' @author Authors: Michel Ballings and Dirk Van den Poel, Maintainer: \email{Michel.Ballings@@UGent.be}
-sensitivity <-  function(predictions, labels) {
+sensitivity <-  function(predictions, labels, perc.rank=TRUE) {
                 
-                cm <- .confusionMatrix(predictions,labels)
+                cm <- .confusionMatrix(predictions,labels,perc.rank)
                 
-                ans <- list( cutoffs=cm$cutoffs, measure=cm$tp / cm$n.pos )
+                ans <- list( cutoffs=c(cm$cutoffs,0), measure=c(cm$tp / cm$n.pos,1) )
                 class(ans) <- c('AUC','sensitivity')
                 return(ans)
 }
@@ -83,6 +84,7 @@ sensitivity <-  function(predictions, labels) {
 #' 
 #' @param predictions A numeric vector of classification probabilities (confidences, scores) of the positive event.
 #' @param labels A factor of observed class labels (responses) with the only allowed values \{0,1\}.
+#' @param perc.rank A logical. If TRUE (default) the percentile rank of the predictions is used.
 #' 
 #' @examples
 #' 
@@ -96,11 +98,11 @@ sensitivity <-  function(predictions, labels) {
 #' \item{cutoffs}{A numeric vector of threshold values}
 #' \item{measure}{A numeric vector of specificity values corresponding to the threshold values}
 #' @author Authors: Michel Ballings and Dirk Van den Poel, Maintainer: \email{Michel.Ballings@@UGent.be}
-specificity <-  function(predictions, labels) {
+specificity <-  function(predictions, labels, perc.rank=TRUE) {
                 
-                cm <- .confusionMatrix(predictions,labels)
+                cm <- .confusionMatrix(predictions,labels, perc.rank)
                 
-                ans <- list( cutoffs=cm$cutoffs, measure=cm$tn / cm$n.neg )
+                ans <- list( cutoffs=c(cm$cutoffs,0), measure=c(cm$tn / cm$n.neg,0) )
                 
                 class(ans) <- c('AUC','specificity')
                 return(ans)
@@ -115,6 +117,7 @@ specificity <-  function(predictions, labels) {
 #' 
 #' @param predictions A numeric vector of classification probabilities (confidences, scores) of the positive event.
 #' @param labels A factor of observed class labels (responses) with the only allowed values \{0,1\}.
+#' @param perc.rank A logical. If TRUE (default) the percentile rank of the predictions is used.
 #' 
 #' @examples
 #' 
@@ -128,11 +131,12 @@ specificity <-  function(predictions, labels) {
 #' \item{cutoffs}{A numeric vector of threshold values}
 #' \item{measure}{A numeric vector of accuracy values corresponding to the threshold values}
 #' @author Authors: Michel Ballings and Dirk Van den Poel, Maintainer: \email{Michel.Ballings@@UGent.be}
-accuracy <-  function(predictions, labels) {
+accuracy <-  function(predictions, labels, perc.rank=TRUE) {
                 
-                cm <- .confusionMatrix(predictions,labels)
+                cm <- .confusionMatrix(predictions,labels, perc.rank)
                 
-                ans <- list( cutoffs=cm$cutoffs, measure= ((cm$tn+cm$tp) / (cm$n.pos + cm$n.neg) ) )
+                #at cutoff of 0 the accuracy equals maximal tpr (i.e., 1) times the proportion of positives
+                ans <- list( cutoffs=c(cm$cutoffs,0), measure= c((cm$tn+cm$tp) / (cm$n.pos + cm$n.neg), mean(as.integer(as.character(labels)) ) ))
                 
                 class(ans) <- c('AUC','accuracy')
                 return(ans)

@@ -1,4 +1,7 @@
 Change log:
 
+* Version 0.2.0: July 2013
+- Added the option perc.rank to sensitivity, specificity, and accuracy
+
 * Version 0.1.0: July 2013
 - Package submitted to CRAN with functions sensitivity, specificity, accuracy, roc, auc, and plot

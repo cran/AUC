@@ -2,7 +2,7 @@
 \alias{accuracy}
 \title{Compute the accuracy curve.}
 \usage{
-  accuracy(predictions, labels)
+  accuracy(predictions, labels, perc.rank = TRUE)
 }
 \arguments{
   \item{predictions}{A numeric vector of classification
@@ -11,6 +11,9 @@
 
   \item{labels}{A factor of observed class labels
   (responses) with the only allowed values \{0,1\}.}
+
+  \item{perc.rank}{A logical. If TRUE (default) the
+  percentile rank of the predictions is used.}
 }
 \value{
   A list containing the following elements:
