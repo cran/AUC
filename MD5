@@ -1,13 +1,13 @@
-fa48af22df15eb8b3c08497cef283fa2 *DESCRIPTION
+f3048674b2263453fcdbd4583b842e3b *DESCRIPTION
 8196a5e4a2d4fce3a09397cbc46d309e *NAMESPACE
 4e443d8d53ca963d59780d8ed7d4ea87 *R/AUCNews.R
 24b6fcbae1a5fab1773d84a39d3ff6f2 *R/auc.R
-0cdfaabcdbd4a0446b4aeb8f55ce284c *R/auxiliary.R
-a559c04c7dc0d13831f3d5b88a134fcd *R/measures.R
+645dcde9ffd89d1d5eafdac5640200e4 *R/auxiliary.R
+f1638a7131bfbb8aa2315070b086a047 *R/measures.R
 80408a6fd2a3cbfd0e461083d31931ce *R/plot.R
 bbb1dcc95c6e616f0d9ec5ef9b779356 *R/zzz.R
 f24d6f4645788011cbc7fc779619835c *data/churn.RData
-75e0243a543386a56670f0ee11f8715d *inst/NEWS
+6b81d20f74792f27ae0da0203bb9e25d *inst/NEWS
 3739bdbd0ffc624be20ecbf8282348e5 *man/AUC-package.Rd
 83761a5b98858c91b69e49dd45a5e5f8 *man/AUCNews.Rd
 e7d1689895e100121ea97965ffc22829 *man/accuracy.Rd

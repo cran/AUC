@@ -24,7 +24,7 @@ roc <-  function(predictions, labels) {
                 #It has less functionality and less error handling and is focused on speed.
                 #please see ROCR
   
-                cm <- .confusionMatrix(predictions,labels,FALSE)
+                cm <- .confusionMatrix(predictions,labels,FALSE,'roc')
                 
                 x <- cm$fp / cm$n.neg
                 y <- cm$tp / cm$n.pos
@@ -67,7 +67,7 @@ roc <-  function(predictions, labels) {
 #' @author Authors: Michel Ballings and Dirk Van den Poel, Maintainer: \email{Michel.Ballings@@UGent.be}
 sensitivity <-  function(predictions, labels, perc.rank=TRUE) {
                 
-                cm <- .confusionMatrix(predictions,labels,perc.rank)
+                cm <- .confusionMatrix(predictions,labels,perc.rank, 'sensitivity')
                 
                 ans <- list( cutoffs=c(cm$cutoffs,0), measure=c(cm$tp / cm$n.pos,1) )
                 class(ans) <- c('AUC','sensitivity')
@@ -100,7 +100,7 @@ sensitivity <-  function(predictions, labels, perc.rank=TRUE) {
 #' @author Authors: Michel Ballings and Dirk Van den Poel, Maintainer: \email{Michel.Ballings@@UGent.be}
 specificity <-  function(predictions, labels, perc.rank=TRUE) {
                 
-                cm <- .confusionMatrix(predictions,labels, perc.rank)
+                cm <- .confusionMatrix(predictions,labels, perc.rank, 'specificity')
                 
                 ans <- list( cutoffs=c(cm$cutoffs,0), measure=c(cm$tn / cm$n.neg,0) )
                 
@@ -133,7 +133,7 @@ specificity <-  function(predictions, labels, perc.rank=TRUE) {
 #' @author Authors: Michel Ballings and Dirk Van den Poel, Maintainer: \email{Michel.Ballings@@UGent.be}
 accuracy <-  function(predictions, labels, perc.rank=TRUE) {
                 
-                cm <- .confusionMatrix(predictions,labels, perc.rank)
+                cm <- .confusionMatrix(predictions,labels, perc.rank, 'accuracy')
                 
                 #at cutoff of 0 the accuracy equals maximal tpr (i.e., 1) times the proportion of positives
                 ans <- list( cutoffs=c(cm$cutoffs,0), measure= c((cm$tn+cm$tp) / (cm$n.pos + cm$n.neg), mean(as.integer(as.character(labels)) ) ))

@@ -1,12 +1,16 @@
 #labels need to be a factor, predictons need to be numeric
-.confusionMatrix <- function(predictions,labels,perc.rank) {
+.confusionMatrix <- function(predictions,labels,perc.rank, measure) {
               
                
               #This function is a scaled down faster version of parts of code of the ROCR package.
               #It has less functionality and less error handling and is focused on speed.
               #For more functionality (e.g., averaging cross validaton runs) see ROCR
               
-              if (perc.rank==TRUE) predictions <- rank(predictions)/length(predictions)
+              if (measure=='sensitivity') {
+                if (perc.rank==TRUE) predictions <- rank(predictions,ties.method="min")/length(predictions)
+              } else if (measure =='specificity' || measure =='accuracy') {
+                if (perc.rank==TRUE) predictions <- rank(predictions,ties.method="max")/length(predictions)
+              }
   
               levels <- sort(levels(labels))
   
