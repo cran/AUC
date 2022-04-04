@@ -6,10 +6,16 @@
               #It has less functionality and less error handling and is focused on speed.
               #For more functionality (e.g., averaging cross validaton runs) see ROCR
               
-              if (measure=='sensitivity') {
+               if (measure=='sensitivity') {
                 if (perc.rank==TRUE) predictions <- rank(predictions,ties.method="min")/length(predictions)
-              } else if (measure =='specificity' || measure =='accuracy') {
+              } else if (measure =='specificity') {
                 if (perc.rank==TRUE) predictions <- rank(predictions,ties.method="max")/length(predictions)
+              } else if (measure =='accuracy'){
+                  if (table(labels)[1] >= table(labels)[2]) {
+                    if (perc.rank==TRUE)  predictions <- rank(predictions,ties.method="max")/length(predictions)
+                  } else if (table(labels)[1] < table(labels)[2]) {
+                    if (perc.rank==TRUE)  predictions <- rank(predictions,ties.method="min")/length(predictions)
+                  }
               }
   
               levels <- sort(levels(labels))
